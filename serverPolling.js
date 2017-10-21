@@ -1,30 +1,23 @@
-//Funktion welche die Einträge für die Liste holt
-function loadEntries() {
-  var allEntries = [];
-  var serverAnzahl = 1;
-  for (var i = 1; i <= serverAnzahl; i++) {
-    queryServer(i, entries);
-  }
-  for (var i = 0; i < allEntries.length; i++) {
-    writeEntry(allEntries[i]);
-  }
-}
-
-function queryServer(number, entries) {
+function queryServer() {
   var URL = "http://ipc772.inf-bb.uni-jena.de/brett/server";
   var ENDING = ".php?method=GET_MESSAGES";
-  $.get(URL.concat(number,ENDING), function(data, status) {
-    if (status === "success")
-      var obj = JSON.parse(data);
-      for (var i = 0; i < Object.keys(obj).length; i++) {
-        putEntryInList(obj[i], entries);
-      }
-  });
+  
+  for (var i = 1; i < 10; i++) {
+	$.get(URL.concat(i,ENDING), function(data, status) {
+		if (status === "success") {
+			var obj = JSON.parse(data);
+			entry = Object.values(obj);
+			for (var j = 0; j < entry.length; j++) {
+				writeEntry(entry[j]);
+			}
+		}
+	});
+  }
 }
 
 function putEntryInList(entry, entries) {
   var found = false;
-  for (var i = 0; i < allEntries.length; i++) {
+  for (var i = 0; i < entries.length; i++) {
     if (entries[i].id === entry.id) {
       if (entries[i].version < entry.version) {
         entries[i] = entry;
@@ -39,12 +32,23 @@ function putEntryInList(entry, entries) {
 }
 
 function writeEntry(jsonObj) {
-  //var obj = JSON.parse(jsonObj);
   var li = document.createElement("li");
-  var t = document.createTextNode(jsonObj.msg);
-
-  li.appendChild(t);
+  li.setAttribute('identifier', jsonObj.id);
+  li.setAttribute('version', jsonObj.version);
+  
+  var h = document.createElement("h4");
+  var p = document.createElement("p");
+  var s = document.createElement("small");
+ 
+  h.innerHTML = jsonObj.author;
+  p.innerHTML = jsonObj.msg;
+  s.innerHTML = jsonObj.creation;
+  
+  li.appendChild(h);
+  li.appendChild(p);
+  li.appendChild(s);
+  
   document.getElementById("entryList").appendChild(li);
 }
 
-$(document).ready(loadEntries());
+$(document).ready(queryServer());
