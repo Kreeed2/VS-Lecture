@@ -1,0 +1,20 @@
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\bin\Debug\ClientApplication.exe.config
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\bin\Debug\ClientApplication.exe
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\bin\Debug\ClientApplication.pdb
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.Properties.Resources.resources
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.csproj.GenerateResource.Cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.csproj.CoreCompileInputs.cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.exe
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.pdb
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.csprojResolveAssemblyReference.cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\ClientApplication\obj\Debug\ClientApplication.MainWindow.resources
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\bin\Debug\ClientApplication.exe.config
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\bin\Debug\ClientApplication.exe
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\bin\Debug\ClientApplication.pdb
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.csprojResolveAssemblyReference.cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.MainWindow.resources
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.Properties.Resources.resources
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.csproj.GenerateResource.Cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.csproj.CoreCompileInputs.cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.exe
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ClientApplication\obj\Debug\ClientApplication.pdb
