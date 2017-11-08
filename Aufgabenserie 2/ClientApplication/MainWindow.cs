@@ -9,7 +9,7 @@ namespace ClientApplication
 {
     public partial class MainWindow : Form
     {
-        private const int port = 80;
+        private const int port = 25565;
         
         // ManualResetEvent instances signal completion.  
         private ManualResetEvent connectDone = new ManualResetEvent(false);
@@ -73,7 +73,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Connect Callback Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Connect Callback Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -93,7 +93,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Receive Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Receive Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -131,7 +131,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Receive Callback Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Receive Callback Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -158,7 +158,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Send Callback Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Send Callback Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

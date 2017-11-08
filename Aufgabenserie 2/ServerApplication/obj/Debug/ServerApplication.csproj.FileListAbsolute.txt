@@ -1,0 +1,6 @@
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ServerApplication\bin\Debug\ServerApplication.exe.config
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ServerApplication\bin\Debug\ServerApplication.exe
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ServerApplication\bin\Debug\ServerApplication.pdb
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ServerApplication\obj\Debug\ServerApplication.csproj.CoreCompileInputs.cache
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ServerApplication\obj\Debug\ServerApplication.exe
+C:\Users\TimKr\Source\Repos\VS-Lecture\Aufgabenserie 2\ServerApplication\obj\Debug\ServerApplication.pdb
