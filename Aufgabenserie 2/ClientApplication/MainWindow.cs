@@ -23,6 +23,28 @@ namespace ClientApplication
             InitializeComponent();
         }
 
+        // Workaround for not knowing how the loopback addresses work.
+        private IPAddress PrepareIP(string stringIP)
+        {
+            if (stringIP == "127.0.0.1" || stringIP == "localhost")
+            {
+                if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                {
+                    throw new Exception("No aviable network");
+                }
+
+                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+
+                return host
+                    .AddressList
+                    .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork);
+            }
+            else
+            {
+                return Dns.GetHostAddresses(txt_IP.Text)[0];
+            }
+        }
+
         private void Btn_request_Click(object sender, EventArgs e)
         {
             // Reset ManualResetEvent instances.
@@ -33,7 +55,7 @@ namespace ClientApplication
             try
             {
                 // Establish the remote endpoint for the socket.  
-                IPAddress ipAddress = Dns.GetHostAddresses(txt_IP.Text)[0];
+                IPAddress ipAddress = PrepareIP(txt_IP.Text);
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 80);
 
                 // Create a TCP/IP socket.  
