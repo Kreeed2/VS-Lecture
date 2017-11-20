@@ -25,6 +25,11 @@ namespace ClientApplication
 
         private void Btn_request_Click(object sender, EventArgs e)
         {
+            // Reset ManualResetEvent instances.
+            connectDone.Reset();
+            sendDone.Reset();
+            receiveDone.Reset();
+
             try
             {
                 // Establish the remote endpoint for the socket.  
