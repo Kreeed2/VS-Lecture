@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClientApplication
@@ -47,44 +48,48 @@ namespace ClientApplication
 
         private void Btn_request_Click(object sender, EventArgs e)
         {
-            // Reset ManualResetEvent instances.
-            connectDone.Reset();
-            sendDone.Reset();
-            receiveDone.Reset();
-
-            try
+            // Dirty Workaround for freezing UI
+            Task.Run(() =>
             {
-                // Establish the remote endpoint for the socket.  
-                IPAddress ipAddress = PrepareIP(txt_IP.Text);
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 80);
+                // Reset ManualResetEvent instances.
+                connectDone.Reset();
+                sendDone.Reset();
+                receiveDone.Reset();
 
-                // Create a TCP/IP socket.  
-                Socket client = new Socket(AddressFamily.InterNetwork,
-                    SocketType.Stream, ProtocolType.Tcp);
+                try
+                {
+                    // Establish the remote endpoint for the socket.  
+                    IPAddress ipAddress = PrepareIP(txt_IP.Text);
+                    IPEndPoint remoteEP = new IPEndPoint(ipAddress, 80);
 
-                // Connect to the remote endpoint.  
-                client.BeginConnect(remoteEP,
-                    new AsyncCallback(ConnectCallback), client);
-                connectDone.WaitOne();
+                    // Create a TCP/IP socket.  
+                    Socket client = new Socket(AddressFamily.InterNetwork,
+                        SocketType.Stream, ProtocolType.Tcp);
 
-                // Send file name to the remote device.  
-                Send(client, txt_file.Text);
-                sendDone.WaitOne();
+                    // Connect to the remote endpoint.  
+                    client.BeginConnect(remoteEP,
+                        new AsyncCallback(ConnectCallback), client);
+                    connectDone.WaitOne();
 
-                // Receive the response from the remote device.  
-                Receive(client);
-                receiveDone.WaitOne();
+                    // Send file name to the remote device.  
+                    Send(client, txt_file.Text);
+                    sendDone.WaitOne();
 
-                // Write the response
-                txt_display.Text = response;
+                    // Receive the response from the remote device.  
+                    Receive(client);
+                    receiveDone.WaitOne();
 
-                client.Shutdown(SocketShutdown.Both);
-                client.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, "Communication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                    // Write the response
+                    txt_display.Text = response;
+
+                    client.Shutdown(SocketShutdown.Both);
+                    client.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Communication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            });
         }
 
         private void ConnectCallback(IAsyncResult asyncResult)

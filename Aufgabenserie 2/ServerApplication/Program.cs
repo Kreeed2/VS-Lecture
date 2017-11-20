@@ -133,7 +133,7 @@ namespace ServerApplication
         //Reads all line of the requested file in the fileDirectory
         private static string ReadRequestedFile(string fileName)
         {
-            string filePath = fileDirectory + fileName.TrimEnd("<EOF>".ToCharArray());
+            string filePath = fileDirectory + "\\" + fileName.TrimEnd("<EOF>".ToCharArray());
             if (File.Exists(filePath))
             {
                 return File.ReadAllText(filePath);
