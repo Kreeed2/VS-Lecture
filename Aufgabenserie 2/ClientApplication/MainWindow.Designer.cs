@@ -41,9 +41,9 @@
             this.lbl_IP.AutoSize = true;
             this.lbl_IP.Location = new System.Drawing.Point(14, 8);
             this.lbl_IP.Name = "lbl_IP";
-            this.lbl_IP.Size = new System.Drawing.Size(79, 13);
+            this.lbl_IP.Size = new System.Drawing.Size(51, 13);
             this.lbl_IP.TabIndex = 0;
-            this.lbl_IP.Text = "Server IP(:Port)";
+            this.lbl_IP.Text = "Server IP";
             // 
             // lbl_file
             // 

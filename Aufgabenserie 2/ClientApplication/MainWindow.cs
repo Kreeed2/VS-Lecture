@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -8,9 +9,7 @@ using System.Windows.Forms;
 namespace ClientApplication
 {
     public partial class MainWindow : Form
-    {
-        private const int port = 25565;
-        
+    {       
         // ManualResetEvent instances signal completion.  
         private ManualResetEvent connectDone = new ManualResetEvent(false);
         private ManualResetEvent sendDone = new ManualResetEvent(false);
@@ -30,7 +29,7 @@ namespace ClientApplication
             {
                 // Establish the remote endpoint for the socket.  
                 IPAddress ipAddress = Dns.GetHostAddresses(txt_IP.Text)[0];
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 80);
 
                 // Create a TCP/IP socket.  
                 Socket client = new Socket(AddressFamily.InterNetwork,
@@ -138,7 +137,7 @@ namespace ClientApplication
         private void Send(Socket client, String data)
         {
             // Convert the string data to byte data using ASCII encoding.  
-            byte[] byteData = Encoding.ASCII.GetBytes(data);
+            byte[] byteData = Encoding.ASCII.GetBytes(data + "<EOF>");
 
             // Begin sending the data to the remote device.  
             client.BeginSend(byteData, 0, byteData.Length, 0,

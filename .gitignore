@@ -2,4 +2,10 @@
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
-/Aufgabenserie 2/ServerApplication/bin/Debug/test.txt
+/Aufgabenserie 2/ServerApplication/bin/*
+/Aufgabenserie 2/.vs/ServerApplication/v15/Server/sqlite3
+/Aufgabenserie 2/.vs/ServerApplication/v15/sqlite3/db.lock
+/Aufgabenserie 2/.vs/ServerApplication/v15/sqlite3/storage.ide-shm
+/Aufgabenserie 2/.vs/ServerApplication/v15/sqlite3/storage.ide-wal
+
+/Aufgabenserie 2/ClientApplication/bin/*
