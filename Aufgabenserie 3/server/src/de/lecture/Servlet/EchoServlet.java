@@ -32,6 +32,7 @@ public class EchoServlet extends HTTPServlet {
         }
         htmlSite.addElement(table);
 
+        //Table
         table = new HtmlTable(2, req.getParameterNames().size());
         table.addHeader("Parameter Name");
         table.addHeader("Parameter Value");
@@ -49,10 +50,12 @@ public class EchoServlet extends HTTPServlet {
 
         body = htmlSite.toString();
 
+        //Head
         res.setHeader("Content-Type","text/html");
         res.setHeader("Content-Length", String.valueOf(body.getBytes().length));
         writer.println(body);
 
+        //refresh
         writer.flush();
         System.out.println("WriterStream EchoServlet flushed");
     }

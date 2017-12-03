@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         ThreadPooledServer server = new ThreadPooledServer(9000);
-        new Thread(server).start();
+        new Thread(server).start();         //New Thread every Client
 
         try {
             System.in.read();

@@ -9,7 +9,7 @@ public class HtmlTable {
     private int lastIndexEntry = 0;
     private int lastIndexRow = 0;
 
-    public HtmlTable(int width, int height) {
+    public HtmlTable(int width, int height) {       //Tabelle
         th = new String[width];
         trs = new String[height][width];
     }
@@ -28,7 +28,7 @@ public class HtmlTable {
     }
 
     @Override
-    public String toString() {
+    public String toString() {      //Einfügen von Absätzen
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<table>\n");
         //Header Section

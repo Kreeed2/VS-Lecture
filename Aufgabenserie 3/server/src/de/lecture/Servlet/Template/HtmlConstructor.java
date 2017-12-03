@@ -16,18 +16,17 @@ public class HtmlConstructor {
         site.add("</html>");
     }
 
-    public void addTitle(String content) {
+    public void addTitle(String content) {          //Title hinzufügen
         int index = site.indexOf("<head>");
         site.add(++index, "<title>" + content + "</title>");
     }
 
-    public void addElement(Object element) {
+    public void addElement(Object element) {        //Element hinzufügen
         int index = site.indexOf("<body>");
         site.add(++index,element.toString());
     }
 
-    //TODO create own class
-    public void addList(List<String> entries) {
+    public void addList(List<String> entries) {     //Liste hinzufügen
         int index = site.indexOf("<body>");
         site.add(++index, "<ul>");
         for (String entry: entries) {
