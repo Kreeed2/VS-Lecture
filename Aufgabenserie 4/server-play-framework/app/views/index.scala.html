@@ -1,0 +1,16 @@
+@(entries: List[models.Entry])
+
+@main("Schwarzes Brett") {
+<ul class="entryList">
+    <form action="/addMessage" method="post">
+        <input type="submit" value="Eintrag hinzufügen">
+    </form>
+    @for(entry <- entries) {
+    <li>
+        <h4>@entry.author</h4>
+        <p>@entry.message</p>
+        <small>@entry.creation</small>
+    </li>
+    }
+</ul>
+}
