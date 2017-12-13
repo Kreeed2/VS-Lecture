@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
@@ -9,3 +9,9 @@
 /Aufgabenserie 2/ClientApplication/obj
 /Aufgabenserie 2/ClientApplication/.vs
 /Aufgabenserie 2/.vs
+
+/Augabenserie 4/server-play-framework/.g8/*
+/Augabenserie 4/server-play-framework/.idea/*
+/Augabenserie 4/server-play-framework/logs/*
+/Augabenserie 4/server-play-framework/target/*
+/Augabenserie 4/target/*
