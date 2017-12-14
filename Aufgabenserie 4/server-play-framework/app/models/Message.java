@@ -6,14 +6,17 @@ import play.data.format.*;
 import play.data.validation.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Entry extends Model {
+public class Message extends Model {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Integer id;
-    public Integer version;
+    public Integer version = 0;
 
     @Constraints.Required
     public String author;
@@ -23,9 +26,6 @@ public class Entry extends Model {
     @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date creation = new Date();
 
-    public Entry(Integer version, String author, String message) {
-        this.version = version;
-        this.author = author;
-        this.message = message;
-    }
+    public static Finder<Integer, Message> finder = new Finder<>(Message.class);
+
 }

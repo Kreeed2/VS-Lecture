@@ -1,0 +1,12 @@
+@(messageForm : Form[Message])
+@import helper._
+
+@main("Edit a Message") {
+    @helper.form(action = routes.MessageController.update()) {
+
+        @helper.inputText(messageForm("author"))
+        @helper.inputText(messageForm("message"))
+
+        <input type="submit" value="Edit Message">
+    }
+}
