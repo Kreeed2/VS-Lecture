@@ -9,6 +9,7 @@ lazy val myProject = (project in file("."))
 scalaVersion := "2.12.2"
 
 libraryDependencies += guice
+libraryDependencies += "javax.xml.bind" % "jaxb-api" % "2.3.0"
 
 // Testing libraries for dealing with CompletionStage...
 libraryDependencies += "org.assertj" % "assertj-core" % "3.6.2" % Test
