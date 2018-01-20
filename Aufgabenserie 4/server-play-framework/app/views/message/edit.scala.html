@@ -1,7 +1,6 @@
-@(messageForm : Form[Message])
-@import helper._
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messageForm: Form[Message])
 
-@main("Edit a Message") {
+    @main(page, isLoggedIn, userInfo) {
     @helper.form(action = routes.MessageController.update()) {
 
         @helper.inputText(messageForm("author"))

@@ -1,11 +1,7 @@
-@(messages: List[Message])
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messages: List[Message])
 
-@main("Schwarzes Brett") {
+@main(page, isLoggedIn, userInfo) {
 <ul class="messageList">
-    @if(flash.containsKey("invalidSession")) {
-        <div class="alert alert-danger">@flash.get("invalidSession")</div>
-    }
-    <a href="/message/create" class="button">Create Message</a>
     @for(message <- messages) {
     <li><a href="@routes.MessageController.show(message.id)" class="btn btn-primary">
         <h4>@message.author</h4>

@@ -2,8 +2,8 @@ package models;
 
 import io.ebean.Finder;
 import io.ebean.Model;
-import play.data.format.*;
-import play.data.validation.*;
+import play.data.format.Formats;
+import play.data.validation.Constraints;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +25,7 @@ public class Message extends Model {
 
     @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date creation = new Date();
+    public String creator;
 
     public static Finder<Integer, Message> finder = new Finder<>(Message.class);
 

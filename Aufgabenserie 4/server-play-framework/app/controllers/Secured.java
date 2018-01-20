@@ -17,6 +17,10 @@ public class Secured extends Authenticator {
         return ctx.session().get("username");
     }
 
+    public static String getName(Context ctx) {
+        return ctx.session().get("username");
+    }
+
     /**
      * Automatic redirect to login page if unauthorized
      * @param ctx The context
@@ -32,8 +36,8 @@ public class Secured extends Authenticator {
      * @param ctx The context.
      * @return True if user is logged in.
      */
-    public boolean isLoggedIn(Context ctx) {
-        return (getUsername(ctx) != null);
+    public static boolean isLoggedIn(Context ctx) {
+        return (getName(ctx) != null);
     }
 
     /**
@@ -41,8 +45,8 @@ public class Secured extends Authenticator {
      * @param ctx The context.
      * @return The UserInfo, or null.
      */
-    public UserInfo getUserInfo(Context ctx) {
-        return (isLoggedIn(ctx) ? UserInfo.findUserByName(getUsername(ctx)) : null);
+    public static UserInfo getUserInfo(Context ctx) {
+        return (isLoggedIn(ctx) ? UserInfo.findUserByName(getName(ctx)) : null);
     }
 
 }

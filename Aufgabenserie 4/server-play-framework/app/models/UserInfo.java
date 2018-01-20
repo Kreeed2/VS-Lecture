@@ -4,9 +4,11 @@ import io.ebean.Finder;
 import io.ebean.Model;
 import play.data.validation.Constraints;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class UserInfo extends Model {
     @Id
     public UUID uuid;
@@ -37,5 +39,22 @@ public class UserInfo extends Model {
      */
     public static boolean isUserNameUsed(String username) {
         return finder.all().stream().anyMatch(userInfo -> userInfo.username.equals(username));
+    }
+
+    /**
+     * Returns true if username and password are valid credentials.
+     *
+     * @param username The username.
+     * @param password The password.
+     * @return True if username is a valid user email and password is valid for that username.
+     */
+    public static boolean isValid(String username, String password) {
+        if ((username != null) && (password != null)) {
+            UserInfo user = findUserByName(username);
+            if (user != null) {
+                return user.password.equals(password);
+            }
+        }
+        return false;
     }
 }
