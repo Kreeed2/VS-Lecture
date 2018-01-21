@@ -68,7 +68,8 @@ public class MessageController extends Controller {
         if (!session().containsKey("id")) {
             return redirect(routes.MessageController.index());
         }
-        if (!message.creator.equals(session("username")))
+
+        if (Message.finder.byId(Integer.valueOf(session("id"))) != null && !Message.finder.byId(Integer.valueOf(session("id"))).creator.equals(session("username")))
             return notAcceptable("Not own bulletin");
 
         Message oldMessage = Message.finder.byId(Integer.valueOf(session("id")));
