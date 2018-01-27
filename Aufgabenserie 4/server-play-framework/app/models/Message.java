@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 public class Message extends Model {
@@ -25,7 +26,7 @@ public class Message extends Model {
 
     @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date creation = new Date();
-    public String creator;
+    public UUID creator;
 
     public static Finder<Integer, Message> finder = new Finder<>(Message.class);
 

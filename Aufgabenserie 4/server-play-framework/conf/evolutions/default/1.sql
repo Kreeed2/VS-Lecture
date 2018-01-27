@@ -9,7 +9,7 @@ create table message (
   author                        varchar(255),
   message                       varchar(255),
   creation                      timestamp,
-  creator                       varchar(255),
+  creator                       varchar(40),
   constraint pk_message primary key (id)
 );
 

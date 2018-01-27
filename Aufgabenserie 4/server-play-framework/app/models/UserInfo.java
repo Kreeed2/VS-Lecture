@@ -3,13 +3,17 @@ package models;
 import io.ebean.Finder;
 import io.ebean.Model;
 import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+@Constraints.Validate
 @Entity
-public class UserInfo extends Model {
+public class UserInfo extends Model implements Constraints.Validatable<List<ValidationError>> {
     @Id
     public UUID uuid;
     @Constraints.Required
@@ -27,6 +31,20 @@ public class UserInfo extends Model {
     public static UserInfo findUserByName(String username) {
         for (UserInfo user : finder.all()) {
             if (user.username.equals(username))
+                return user;
+        }
+        return null;
+    }
+
+    /**
+     * Finds first user with matching UUID
+     *
+     * @param id The UUID to find in the DB
+     * @return If a user is found, the UserInfo else null
+     */
+    public static UserInfo findUserById(UUID id) {
+        for (UserInfo user : finder.all()) {
+            if (user.uuid.equals(id))
                 return user;
         }
         return null;
@@ -56,5 +74,17 @@ public class UserInfo extends Model {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<ValidationError> validate() {
+        List<ValidationError> errors = new ArrayList<>();
+
+        if (!isValid(username, password)) {
+            errors.add(new ValidationError("username", ""));
+            errors.add(new ValidationError("password", ""));
+        }
+
+        return (errors.size() > 0) ? errors : null;
     }
 }

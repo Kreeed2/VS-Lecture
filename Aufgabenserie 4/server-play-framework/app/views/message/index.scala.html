@@ -1,13 +1,18 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messages: List[Message])
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messages: List[Message], timestamp: String)
 
-@main(page, isLoggedIn, userInfo) {
-<ul class="messageList">
+    @main(page, isLoggedIn, userInfo, timestamp) {
+        <ul class="list-unstyled">
     @for(message <- messages) {
-    <li><a href="@routes.MessageController.show(message.id)" class="btn btn-primary">
-        <h4>@message.author</h4>
-        <p>@message.message</p>
-        <small>@message.creation</small>
-    </a></li>
+        <li class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">@message.author</h5>
+                <p class="card-text">@message.message</p>
+                <a href="@routes.MessageController.show(message.id)" class="btn btn-primary">Show</a>
+                <div class="card-footer text-muted">
+                @message.creation
+                </div>
+            </div>
+        </li>
     }
 </ul>
 }

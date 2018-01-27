@@ -1,12 +1,12 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, message: Message)
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, message: Message, timestamp: String)
 
-@main(page, isLoggedIn, userInfo) {
+    @main(page, isLoggedIn, userInfo, timestamp) {
     <h4>@message.author</h4>
     <p>@message.message</p>
     <small>ID: @message.id - @message.creation - Version: @message.version</small>
 
     <p>
-        @if(isLoggedIn && message.creator == userInfo.username) {
+        @if(isLoggedIn && message.creator == userInfo.uuid) {
             <a href="@routes.MessageController.edit(message.id)" class="button">Edit</a>
             <a href="@routes.MessageController.delete(message.id)" class="button">Delete</a>
         }

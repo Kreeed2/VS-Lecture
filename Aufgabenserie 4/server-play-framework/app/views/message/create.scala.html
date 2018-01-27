@@ -1,6 +1,6 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messageForm: Form[Message])
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messageForm: Form[Message], timestamp: String)
 
-    @main(page, isLoggedIn, userInfo) {
+    @main(page, isLoggedIn, userInfo, timestamp) {
     @helper.form(action = routes.MessageController.save()) {
 
         @helper.inputText(messageForm("author"))

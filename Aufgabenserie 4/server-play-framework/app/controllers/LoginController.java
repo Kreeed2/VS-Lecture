@@ -6,7 +6,6 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.formData.LoginFormData;
 import views.formData.RegisterFormData;
 import views.html.authentification.login;
 import views.html.authentification.profile;
@@ -25,8 +24,8 @@ public class LoginController extends Controller {
      * @return The Login page.
      */
     public Result login() {
-        Form<LoginFormData> dataForm = formFactory.form(LoginFormData.class);
-        return ok(login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dataForm));
+        Form<UserInfo> dataForm = formFactory.form(UserInfo.class);
+        return ok(login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dataForm, session("userTime")));
     }
 
     /**
@@ -36,7 +35,7 @@ public class LoginController extends Controller {
      */
     public Result register() {
         Form<RegisterFormData> dataForm = formFactory.form(RegisterFormData.class);
-        return ok(register.render("Register", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dataForm));
+        return ok(register.render("Register", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dataForm, session("userTime")));
     }
 
 
@@ -55,7 +54,7 @@ public class LoginController extends Controller {
 
         if (formData.hasErrors()) {
             flash("error", "Login credentials not valid.");
-            return badRequest(register.render("Register", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
+            return badRequest(register.render("Register", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, session("userTime")));
         } else {
             // username/password OK, so now we set the session variable and only go to authenticated pages.
             UserInfo newUser = new UserInfo();
@@ -64,7 +63,7 @@ public class LoginController extends Controller {
             newUser.save();
 
             session().clear();
-            session("username", formData.get().username);
+            session("userId", newUser.uuid.toString());
             return redirect(routes.LoginController.profile());
         }
     }
@@ -81,16 +80,21 @@ public class LoginController extends Controller {
     public Result postLogin() {
 
         // Get the submitted form data from the request object, and run validation.
-        Form<LoginFormData> formData = formFactory.form(LoginFormData.class).bindFromRequest();
+        Form<UserInfo> formData = formFactory.form(UserInfo.class).bindFromRequest();
 
         if (formData.hasErrors()) {
             flash("error", "Login credentials not valid.");
-            return badRequest(login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
+            return badRequest(login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, session("userTime")));
         } else {
             // username/password OK, so now we set the session variable and only go to authenticated pages.
-            session().clear();
-            session("username", formData.get().username);
-            //TODO figure out why Chrome discards cookies immediately when maxAge is set
+            session().remove("userId");
+            UserInfo currUser = UserInfo.findUserByName(formData.get().username);
+            if (currUser != null) {
+                session("userId", currUser.uuid.toString());
+            } else
+                return badRequest(login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, session("userTime")));
+
+
             return redirect(routes.LoginController.profile());
         }
     }
@@ -102,7 +106,7 @@ public class LoginController extends Controller {
      */
     @Security.Authenticated(Secured.class)
     public Result logout() {
-        session().clear();
+        session().remove("userId");
         return redirect(routes.MessageController.index());
     }
 
@@ -113,6 +117,6 @@ public class LoginController extends Controller {
      */
     @Security.Authenticated(Secured.class)
     public Result profile() {
-        return ok(profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+        return ok(profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), session("userTime")));
     }
 }
