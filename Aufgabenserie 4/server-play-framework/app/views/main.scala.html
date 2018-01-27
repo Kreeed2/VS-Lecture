@@ -1,20 +1,69 @@
 @*
- * This template is called from the `index` template. This template
- * handles the rendering of the page header and body tags. It takes
- * two arguments, a `String` for the title of the page and an `Html`
- * object to insert into the body of the page.
- *@
-@(title: String)(content: Html)
+* This template is called from the `index` template. This template
+* handles the rendering of the page header and body tags. It takes
+* two arguments, a `String` for the title of the page and an `Html`
+* object to insert into the body of the page.
+*@
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, timestamp: String)(content: Html)
 
 <!doctype html>
 <html lang="en">
     <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>@page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="@routes.Assets.versioned("stylesheets/sticky-footer-navbar.css")" rel="stylesheet">
     </head>
     <body>
-        <div class="header"><h1>@title</h1></div>
-        <div>@content</div>
+        <header>
+                <!-- Responsive navbar -->
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">Bulletin Board</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    @if(isLoggedIn) {
+                        <li class="nav-item @if(page == "Profile") { active }">
+                            <a class="nav-link" href="@routes.LoginController.profile()">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(page == "Create") { active }" href="@routes.MessageController.create()" >
+                                Create Message</a>
+                        </li>
+                    }
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                    @if(isLoggedIn) {
+                        <li class="nav-item"><span class="navbar-text">@userInfo.username</span></li>
+                        <li class="nav-item"><a class="nav-link" href="@routes.LoginController.logout()">Logout</a></li>
+                    } else {
+                        <li class="nav-item"><a class="nav-link" href="@routes.LoginController.login()">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@routes.LoginController.register()">
+                            Register</a></li>
+                    }
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main role="main" class="container">
+            <div>@content</div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">@timestamp</span>
+            </div>
+        </footer>
+
+            <!-- Bootstrap core JavaScript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>

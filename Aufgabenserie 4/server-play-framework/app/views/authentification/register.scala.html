@@ -1,0 +1,9 @@
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, registerForm: Form[views.formData.RegisterFormData], timestamp: String)
+
+    @import bootstrap3._
+
+    @main(page, isLoggedIn, userInfo, timestamp) {
+        <div class="container">
+        @loginform(routes.LoginController.postRegister(), registerForm("username"), registerForm("password"))
+        </div>
+    }

@@ -1,0 +1,18 @@
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, messages: List[Message], timestamp: String)
+
+    @main(page, isLoggedIn, userInfo, timestamp) {
+        <ul class="list-unstyled">
+    @for(message <- messages) {
+        <li class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">@message.author</h5>
+                <p class="card-text">@message.message</p>
+                <a href="@routes.MessageController.show(message.id)" class="btn btn-primary">Show</a>
+                <div class="card-footer text-muted">
+                @message.creation
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+}
